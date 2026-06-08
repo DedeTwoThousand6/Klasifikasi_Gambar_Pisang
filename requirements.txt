@@ -1,0 +1,11 @@
+numpy
+pandas
+matplotlib
+opencv-python
+scikit-learn
+scikit-image
+joblib
+flask
+flask-cors
+werkzeug
+seaborn

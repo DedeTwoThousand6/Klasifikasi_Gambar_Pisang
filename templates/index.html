@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BananaAI — Klasifikasi Kualitas Pisang</title>
+    <meta name="description" content="Klasifikasi kualitas pisang secara instan dengan AI berbasis KNN. Upload gambar dan dapatkan hasil analisis akurat.">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.9.14/dist/dotlottie-wc.js" type="module"></script>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+
+    <!-- ===== FLOATING BANANA BACKGROUND ===== -->
+    <div class="banana-bg" aria-hidden="true">
+        <span class="bb" style="--x:5%;  --s:3.2rem; --d:0s;   --dur:16s;">🍌</span>
+        <span class="bb" style="--x:14%; --s:2rem;   --d:-4s;  --dur:20s;">🍌</span>
+        <span class="bb" style="--x:25%; --s:4rem;   --d:-8s;  --dur:14s;">🍌</span>
+        <span class="bb" style="--x:36%; --s:2.5rem; --d:-2s;  --dur:18s;">🍌</span>
+        <span class="bb" style="--x:47%; --s:3.5rem; --d:-11s; --dur:22s;">🍌</span>
+        <span class="bb" style="--x:58%; --s:2.2rem; --d:-5s;  --dur:17s;">🍌</span>
+        <span class="bb" style="--x:68%; --s:3.8rem; --d:-9s;  --dur:19s;">🍌</span>
+        <span class="bb" style="--x:78%; --s:2.8rem; --d:-1s;  --dur:15s;">🍌</span>
+        <span class="bb" style="--x:87%; --s:4.2rem; --d:-7s;  --dur:23s;">🍌</span>
+        <span class="bb" style="--x:95%; --s:2.4rem; --d:-13s; --dur:21s;">🍌</span>
+        <span class="bb" style="--x:20%; --s:1.8rem; --d:-15s; --dur:25s;">🍌</span>
+        <span class="bb" style="--x:72%; --s:5rem;   --d:-3s;  --dur:12s;">🍌</span>
+        <span class="bb" style="--x:42%; --s:1.6rem; --d:-18s; --dur:28s;">🍌</span>
+        <span class="bb" style="--x:53%; --s:3rem;   --d:-6s;  --dur:16s;">🍌</span>
+        <span class="bb" style="--x:90%; --s:2rem;   --d:-10s; --dur:20s;">🍌</span>
+    </div>
+
+    <!-- ===== BACKGROUND GLOW ===== -->
+    <div class="bg-glow" aria-hidden="true">
+        <div class="glow g1"></div>
+        <div class="glow g2"></div>
+        <div class="glow g3"></div>
+    </div>
+
+    <!-- ===== APP SHELL ===== -->
+    <div class="app-shell">
+
+        <!-- ======= SIDEBAR ======= -->
+        <aside class="sidebar">
+            <!-- Brand -->
+            <div class="brand">
+                <div class="brand-icon-wrap">
+                    <span class="brand-emoji">🍌</span>
+                </div>
+                <div>
+                    <p class="brand-name">BananaAI</p>
+                    <p class="brand-sub">Quality Classifier</p>
+                </div>
+            </div>
+
+            <!-- Status chip -->
+            <div class="status-chip">
+                <span class="dot-live"></span>
+                Model Aktif &nbsp;·&nbsp; <strong>98.08%</strong>
+            </div>
+
+            <!-- Lottie hero (moved & enlarged) -->
+            <div class="lottie-hero">
+                <dotlottie-wc
+                    src="https://lottie.host/7be3de8f-1341-41bf-9e3a-29de2181ba01/G6b3xN1cJn.lottie"
+                    style="width: 180px; height: 180px"
+                    autoplay loop>
+                </dotlottie-wc>
+                <p class="lottie-caption">Siap Menganalisis!</p>
+            </div>
+
+            <!-- Model info -->
+            <div class="info-card">
+                <p class="card-title">⚙️ Info Model</p>
+                <div class="info-row"><span>Algoritma</span><span class="chip-val">KNN + PCA</span></div>
+                <div class="info-row"><span>Akurasi</span><span class="chip-val gold">98.08%</span></div>
+                <div class="info-row"><span>Fitur</span><span class="chip-val">Color · LBP · Shape</span></div>
+                <div class="info-row"><span>Kategori</span><span class="chip-val">3 Kelas</span></div>
+            </div>
+
+            <!-- Categories -->
+            <div class="cat-card">
+                <p class="card-title">🏷️ Kategori</p>
+                <div class="cat-item mentah">
+                    <div class="cat-icon"></div>
+                    <div>
+                        <p class="cat-name">Mentah</p>
+                        <p class="cat-hint">Belum siap konsumsi</p>
+                    </div>
+                </div>
+                <div class="cat-item matang">
+                    <div class="cat-icon"></div>
+                    <div>
+                        <p class="cat-name">Matang</p>
+                        <p class="cat-hint">Siap dikonsumsi</p>
+                    </div>
+                </div>
+                <div class="cat-item busuk">
+                    <div class="cat-icon"></div>
+                    <div>
+                        <p class="cat-name">Busuk</p>
+                        <p class="cat-hint">Tidak layak konsumsi</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <div class="sidebar-footer">
+                <p class="footer-label">Ditenagai oleh</p>
+                <div class="tech-row">
+                    <span class="tech-tag">scikit-learn</span>
+                    <span class="tech-tag">OpenCV</span>
+                    <span class="tech-tag">Flask</span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- ======= MAIN ======= -->
+        <main class="main-panel">
+
+            <!-- ---- UPLOAD VIEW ---- -->
+            <section class="view" id="view-upload">
+
+                <!-- Header -->
+                <div class="upload-header">
+                    <h1>Analisis Kualitas Pisang 🍌</h1>
+                    <p>Unggah foto pisang kamu dan AI kami akan mengklasifikasikannya secara instan!</p>
+                </div>
+
+                <!-- Drop Zone -->
+                <div class="drop-zone" id="drop-zone">
+                    <input type="file" id="file-input" accept="image/*" hidden>
+
+                    <!-- Idle -->
+                    <div class="drop-idle" id="drop-idle">
+                        <div class="drop-icon">
+                            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                                <polyline points="17 8 12 3 7 8"/>
+                                <line x1="12" y1="3" x2="12" y2="15"/>
+                            </svg>
+                        </div>
+                        <p class="drop-title">Seret &amp; Lepas foto pisang di sini</p>
+                        <p class="drop-or">atau</p>
+                        <button class="btn-browse" id="btn-browse" type="button">
+                            📁 Pilih Gambar
+                        </button>
+                        <p class="drop-format">JPG · PNG · WEBP — maks. 16 MB</p>
+                    </div>
+
+                    <!-- Preview -->
+                    <div class="drop-preview" id="drop-preview" style="display:none">
+                        <img id="preview-img" src="" alt="Preview">
+                        <div class="preview-toolbar">
+                            <button class="btn-ghost" id="btn-change" type="button">✏️ Ganti</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Analyze -->
+                <button class="btn-analyze" id="btn-analyze" disabled>
+                    <span class="btn-label">🔍 Analisis Sekarang</span>
+                    <div class="btn-spinner" id="btn-spinner" style="display:none"><div class="spin"></div></div>
+                    <svg class="btn-arrow" id="btn-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+                    </svg>
+                </button>
+
+                <!-- Tips -->
+                <div class="tips-grid">
+                    <div class="tip">💡 Gunakan foto dengan pencahayaan cukup</div>
+                    <div class="tip">📐 Pastikan pisang terlihat jelas di foto</div>
+                    <div class="tip">🎯 Foto close-up memberikan hasil terbaik</div>
+                </div>
+
+            </section>
+
+            <!-- ---- RESULT VIEW ---- -->
+            <section class="view result-view" id="view-result" style="display:none">
+                <div class="result-layout">
+
+                    <!-- Image side -->
+                    <div class="result-img-side">
+                        <img id="result-img" src="" alt="Analyzed Banana">
+                        <div class="result-badge" id="result-img-badge"></div>
+                    </div>
+
+                    <!-- Data side -->
+                    <div class="result-data">
+                        <button class="btn-back" id="btn-back">
+                            ← Analisis Lagi
+                        </button>
+
+                        <!-- Hero -->
+                        <div class="result-hero">
+                            <div class="hero-emoji-box">
+                                <span id="result-emoji" class="hero-emoji"></span>
+                            </div>
+                            <div>
+                                <p class="res-label">Klasifikasi</p>
+                                <h2 class="res-class" id="result-klass"></h2>
+                            </div>
+                        </div>
+
+                        <!-- Desc -->
+                        <div class="res-desc" id="result-desc"></div>
+
+                        <!-- Confidence -->
+                        <div class="conf-wrap">
+                            <div class="conf-top">
+                                <span class="conf-lbl">Tingkat Kepercayaan</span>
+                                <span class="conf-pct" id="conf-pct"></span>
+                            </div>
+                            <div class="conf-bar"><div class="conf-fill" id="conf-fill"></div></div>
+                        </div>
+
+                        <!-- Probabilities -->
+                        <div class="proba-wrap">
+                            <p class="proba-title">Distribusi Probabilitas</p>
+                            <div id="proba-block"></div>
+                        </div>
+
+                        <!-- Recommendation -->
+                        <div class="rec-card">
+                            <p class="rec-head">💬 Rekomendasi</p>
+                            <p class="rec-body" id="rec-text"></p>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- Toast -->
+    <div class="toast" id="toast"><span id="toast-msg"></span></div>
+
+    <script src="/static/js/app.js"></script>
+</body>
+</html>
